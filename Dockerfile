@@ -15,4 +15,3 @@ CMD ["npm", "start"]
 FROM grafana/grafana-oss
 
 ENV GF_SECURITY_ALLOW_EMBEDDING=true
-ENV GF_SECURITY_COOKIE_SAMESITE=none
