@@ -1,6 +1,6 @@
-FROM node:alpine as builder
+FROM alpine:3.14
 
-WORKDIR /app
+RUN apk update && apk upgrade && apk add nodejs npm grafana
 
 COPY ./package.json ./
 RUN npm install
@@ -12,6 +12,7 @@ COPY ./index.js ./index.js
 
 CMD ["npm", "start"]
 
-FROM grafana/grafana-enterprise
+FROM grafana/grafana-oss
 
-COPY --from=builder /app/logs /tmp/logs
+ENV GF_SECURITY_ALLOW_EMBEDDING=true
+ENV GF_SECURITY_COOKIE_SAMESITE=none
